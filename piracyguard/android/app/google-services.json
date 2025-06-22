@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "846477852289",
+    "project_id": "piracyguard",
+    "storage_bucket": "piracyguard.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846477852289:android:95da636601f45da7565780",
+        "android_client_info": {
+          "package_name": "com.example.piracyguard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846477852289-om8q0j4s8ucnpjve1nqop8apjnokr6a3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM3sKgXuZ0vCrECz3GxgL622_6Bia8pSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846477852289-om8q0j4s8ucnpjve1nqop8apjnokr6a3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "846477852289-1s5isvmqbt36ak0mq1p6ru9jko3epd2m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.piracyguardTestApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846477852289:android:1f7bbf74aee93884565780",
+        "android_client_info": {
+          "package_name": "com.example.piracyguard_test_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846477852289-lutqobnb41c8oofu4f8l027s05o1j8vp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.piracyguard_test_app",
+            "certificate_hash": "2fb2c3279dcadd10f348c88e383cd07bb46ae60d"
+          }
+        },
+        {
+          "client_id": "846477852289-om8q0j4s8ucnpjve1nqop8apjnokr6a3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM3sKgXuZ0vCrECz3GxgL622_6Bia8pSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846477852289-om8q0j4s8ucnpjve1nqop8apjnokr6a3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "846477852289-1s5isvmqbt36ak0mq1p6ru9jko3epd2m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.piracyguardTestApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

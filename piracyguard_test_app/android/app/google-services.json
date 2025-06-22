@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "846477852289",
+    "project_id": "piracyguard",
+    "storage_bucket": "piracyguard.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846477852289:android:1f7bbf74aee93884565780",
+        "android_client_info": {
+          "package_name": "com.example.piracyguard_test_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM3sKgXuZ0vCrECz3GxgL622_6Bia8pSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

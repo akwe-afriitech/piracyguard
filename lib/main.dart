@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:piracyguard/screens/codecheck.dart';
 import 'package:piracyguard/screens/homepage.dart';
 import 'package:piracyguard/screens/licensetracking.dart';
 import 'package:piracyguard/screens/generatelicense.dart';
@@ -7,7 +10,12 @@ import 'package:piracyguard/screens/notification.dart';
 import 'package:piracyguard/components/bottonNav.dart';
 import 'package:piracyguard/screens/setting.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseFirestore.instance.settings;
   runApp(const MyApp());
 }
 
@@ -29,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/notification': (context) => const NotificationPage(),
         '/settings': (context) =>  SettingScreen(),
         '/newLicense': (context) =>  GenerateLicenseScreen(),
+        '/codecheck' : (context) => CodeCheckPage(),
         '/bottomNav': (context) => BottomNav(
           currentIndex: 0,
           onTap: (index) {

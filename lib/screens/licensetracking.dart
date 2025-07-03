@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'generatelicense.dart';
 import '../components/newlicense.dart';
 
 class LicenseTrackingPage extends StatefulWidget {
@@ -9,32 +9,10 @@ class LicenseTrackingPage extends StatefulWidget {
 }
 
 class _LicenseTrackingPageState extends State<LicenseTrackingPage>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   int _selectedTab = 0;
   int _selectedBottomNav = 0;
-  // Dummy data for demonstration
-  List<Map<String, String>> clients = [
-    {
-      'username': 'john_doe',
-      'uid': 'UID12345',
-      'license': 'LIC-ABC-123',
-      'duplicated': 'false',
-    },
-    {
-      'username': 'jane_smith',
-      'uid': 'UID67890',
-      'license': 'LIC-XYZ-789',
-      'duplicated': 'true',
-    },
-    {
-      'username': 'alice_wonder',
-      'uid': 'UID54321',
-      'license': 'LIC-DEF-456',
-      'duplicated': 'false',
-    },
-  ];
 
-  // Dummy data for statistics
   List<FlSpot> licenseStats = [
     const FlSpot(1, 2),
     const FlSpot(2, 4),
@@ -45,56 +23,79 @@ class _LicenseTrackingPageState extends State<LicenseTrackingPage>
     const FlSpot(7, 12),
   ];
 
-  void _blockUser(int index) {
-    setState(() {
-      clients[index]['blocked'] = 'true';
-    });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${clients[index]['username']} has been blocked.')),
-    );
-  }
-
   Widget _buildLicenseTrackingTab() {
-    return ListView.builder(
-      itemCount: clients.length,
-      itemBuilder: (context, index) {
-        final client = clients[index];
-        final isDuplicated = client['duplicated'] == 'true';
-        final isBlocked = client['blocked'] == 'true';
-        return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: ListTile(
-            leading: CircleAvatar(
-              child: Text(client['username']![0].toUpperCase()),
-            ),
-            title: Text(client['username']!),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('UID: ${client['uid']}'),
-                Text('License: ${client['license']}'),
-                if (isDuplicated)
-                  const Text(
-                    'Duplicated License!',
-                    style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+    Size size = MediaQuery.sizeOf(context);
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('tracking').orderBy('createdAt').snapshots(),
+      builder: (context, snapshot) {
+        if(!snapshot.hasData){
+          return const CircularProgressIndicator();
+        }
+        return ListView.builder(
+          itemCount: snapshot.data!.docs.length,
+          itemBuilder: (context, index) {
+            String profile = snapshot.data!.docs[index]['displayName'][0].toUpperCase();
+            String displayName = snapshot.data!.docs[index]['displayName'];
+            String license = snapshot.data!.docs[index]['license'];
+            String uid = snapshot.data!.docs[index]['uid'];
+            String type = snapshot.data!.docs[index]['type'];
+            bool isVerified = snapshot.data!.docs[index]['isVerified'];
+            bool isBlocked = snapshot.data!.docs[index]['isBlocked'];
+            return Card(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      child: Text(profile),
+                    ),
+                    title: Text(displayName),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('License: $license'),
+                        Text(type, style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
+                      ],
+                    ),
+                    trailing: !isVerified
+                        ? ElevatedButton(
+                            onPressed: !isBlocked ?  () async{
+                              await FirebaseFirestore.instance.collection('users').doc(uid).update({
+                                    'isBlocked': true
+                                  });
+                            }:null,
+                            style: ElevatedButton.styleFrom(backgroundColor: !isBlocked ?Colors.red : Colors.grey),
+                            child: !isBlocked ? const Text('Block'):const Text('Blocked'),
+                          )
+                        : null,
                   ),
-                if (isBlocked)
-                  const Text(
-                    'Blocked',
-                    style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-                  ),
-              ],
-            ),
-            trailing: isDuplicated && !isBlocked
-                ? ElevatedButton(
-                    onPressed: () => _blockUser(index),
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                    child: const Text('Block'),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 0,horizontal: size.width*0.05),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text('STATUS : ',style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),),
+                            isVerified ? Text(' VERIFIED', style: TextStyle(fontSize: 12),)
+                                :Text(' UNVERIFIED', style: TextStyle(fontSize: 12, color: Colors.grey),),
+                          ],
+                        ),
+                        IconButton(
+                            onPressed: (){
+                              FirebaseFirestore.instance.collection('tracking').doc(uid).delete();
+                            },
+                            icon: Icon(Icons.delete, color: Colors.red,)
+                        )
+                      ],
+                    ),
                   )
-                : null,
-          ),
+                ],
+              ),
+            );
+          },
         );
-      },
+      }
     );
   }
 
@@ -171,4 +172,5 @@ class _LicenseTrackingPageState extends State<LicenseTrackingPage>
       ),
     );
   }
+
 }

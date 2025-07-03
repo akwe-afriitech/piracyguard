@@ -85,7 +85,11 @@ class _HomePageState extends State<HomePage> {
                       Navigator.pushNamed(context, '/reportgenerationpage');
                     },
                   ),
-                  _buildGridButton(icon: Icons.code, label: 'Code Checks'),
+                  _buildGridButton(icon: Icons.code, label: 'Code Checks',
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/codecheck');
+                      }
+                  ),
                   _buildGridButton(
                     icon: Icons.security,
                     label: 'Generate License',

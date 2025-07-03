@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:piracyguard/components/bottonNav.dart';
 import '../components/newlicense.dart';
 
@@ -25,7 +24,8 @@ class _GenerateLicenseScreenState extends State<GenerateLicenseScreen> {
         title: const Text('Generate License'),
         centerTitle: true,
       ),
-      body: NewLicenseScreen(),
+      body: SingleChildScrollView(
+          child: NewLicenseScreen()),
       bottomNavigationBar: BottomNav(
         currentIndex: _selectedIndex,
         onTap: _onNavBarTapped,

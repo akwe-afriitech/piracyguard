@@ -162,15 +162,15 @@ class _UserCardState extends State<UserCard> {
             ),
             const Divider(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 4.0),
+              padding: const EdgeInsets.symmetric(horizontal: 1.0, vertical: 2.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('STATUS: ${widget.user.isVerified ? "VERIFIED" : "UNVERIFIED"}', style: const TextStyle(fontWeight: FontWeight.w500)),
-                      Text('TYPE: ${widget.user.type}', style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                      Text('STATUS: ${widget.user.isVerified ? "VERIFIED" : "UNVERIFIED"}', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 10 )),
+                      Text('TYPE: ${widget.user.type}', style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 10 )),
                     ],
                   ),
                   Row(
@@ -179,11 +179,11 @@ class _UserCardState extends State<UserCard> {
                       SizedBox(
                         width: 100,
                         child: _isChecking
-                            ? const Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2)))
+                            ? const Center(child: SizedBox(height: 10, width: 10, child: CircularProgressIndicator(strokeWidth: 2)))
                             : ElevatedButton(
                                 onPressed: _runCheck,
                                 style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                                child: const Text('Check'),
+                                child: const Text('Check',style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 10 ) ),
                               ),
                       ),
                       const SizedBox(width: 8),

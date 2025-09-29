@@ -37,7 +37,7 @@ class _SettingScreenState extends State<SettingScreen> {
           _buildSettingRow(context, 'Manage Account', () {
             // Navigate to Manage Account
           }),
-          _buildSettingRow(context, 'Notifications', () {
+          _buildSettingRow(context, 'Notifications', () {  
             // Navigate to Notifications
           }),
           _buildSettingRow(context, 'Preferences', () {
